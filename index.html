@@ -25,15 +25,15 @@
         <br>
         <article class="artl-bottom">
             <div class="divGTN">
-                <img src="https://img.youtube.com/vi/JMJXvsCLu6s/maxresdefault.jpg">
+                <img class="imgPreview" src="https://img.youtube.com/vi/JMJXvsCLu6s/maxresdefault.jpg">
                 <br>
-                <a href="https://img.youtube.com/vi/JMJXvsCLu6s/maxresdefault.jpg" download><button>Скачать</button></a>
+                <a href="https://img.youtube.com/vi/JMJXvsCLu6s/maxresdefault.jpg" download><button onclick="buttonDWN ()">Скачать</button></a>
             </div>
         </article>
     </section>
     <footer>
-        <p class="ftr-copyright">© Ильичёв Колян, 2021</p>
-        <p class="ftr-ver">ver. 0.1</p>
+        <p class="ftr-copyright">© <a href="">Ильичёв Колян</a>, 2021</p>
+        <p class="ftr-ver">ver. 0.11</p>
     </footer>
     <script>
         let inputText = document.querySelector('.inputText').value;
@@ -42,13 +42,21 @@
         function buttonGET (){
             idYTB = youtube_parser(inputText);
             srcIMG = "https://img.youtube.com/vi/" + idYTB + "/maxresdefault.jpg"; //https://img.youtube.com/vi/JMJXvsCLu6s/maxresdefault.jpg
-            divGTN.innerHTML = '<img src="' + srcIMG + '"><br><a href="' + srcIMG + '" download><button>Скачать</button></a>';
+            divGTN.innerHTML = '<p>Аге, это прям будет так работать)) или у тебя ссылка битая(</p>';
+            divGTN.innerHTML = '<img class="imgPreview" src="' + srcIMG + '"><br><a href="' + srcIMG + '" download><button>Скачать</button></a>';
         }
 
         function youtube_parser(url) {
             var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
             var match = url.match(regExp);
             return (match && match[7].length == 11) ? match[7] : false;
+        }
+
+        function buttonDWN () {
+            var link = document.createElement('a');
+            link.setAttribute('href', 'https://img.youtube.com/vi/JMJXvsCLu6s/maxresdefault.jpg');
+            link.setAttribute('download', 'download');
+            link.click();
         }
     </script>
 </body>
