@@ -25,9 +25,11 @@
         <br>
         <article class="artl-bottom">
             <div class="divGTN">
-                <img class="imgPreview" src="https://img.youtube.com/vi/JMJXvsCLu6s/maxresdefault.jpg">
+                <canvas class="canvasPreview" width="1280" height="720">
+                    <img class="imgPreview" src="https://img.youtube.com/vi/JMJXvsCLu6s/maxresdefault.jpg">
+                </canvas>
                 <br>
-                <a href="https://img.youtube.com/vi/JMJXvsCLu6s/maxresdefault.jpg" download><button onclick="buttonDWN ()">Скачать</button></a>
+                <button onclick="buttonDWN ()">Скачать</button>
             </div>
         </article>
     </section>
@@ -36,14 +38,33 @@
         <p class="ftr-ver">ver. 0.11</p>
     </footer>
     <script>
-        let inputText = document.querySelector('.inputText').value;
-        let divGTN = document.querySelector('.divGTN');
+        var inputText = document.querySelector('.inputText').value;
+        var divGTN = document.querySelector('.divGTN');
+        let srcIMG = "https://img.youtube.com/vi/JMJXvsCLu6s/maxresdefault.jpg";
+        
+        getImage();
+        setTimeout(getImage, 1000);
+        function getImage() {
+            let canvas = document.querySelector(".canvasPreview");
+            let ctx = canvas.getContext("2d");
+            let img = new Image();
+            img.src = srcIMG;
+            //img.setAttribute('crossOrigin', 'anonymous');
+            canvas.width = img.width;
+            canvas.height = img.height;
+            ctx.drawImage(img, 0, 0);
+            //let dataURL = canvas.toDataURL('image/png');
+            //return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+            //return dataURL;
+        }
 
         function buttonGET (){
-            idYTB = youtube_parser(inputText);
+            var idYTB = youtube_parser(inputText);
             srcIMG = "https://img.youtube.com/vi/" + idYTB + "/maxresdefault.jpg"; //https://img.youtube.com/vi/JMJXvsCLu6s/maxresdefault.jpg
+            getImage();
+            setTimeout(getImage, 1000);
             divGTN.innerHTML = '<p>Аге, это прям будет так работать)) или у тебя ссылка битая(</p>';
-            divGTN.innerHTML = '<img class="imgPreview" src="' + srcIMG + '"><br><a href="' + srcIMG + '" download><button>Скачать</button></a>';
+            divGTN.innerHTML = '<canvas class="canvasPreview" width="1280" height="720"><img class="imgPreview" src="' + srcIMG + '"></canvas><br><a href="' + srcIMG + '" download><button>Скачать</button></a>';
         }
 
         function youtube_parser(url) {
@@ -56,6 +77,7 @@
             var link = document.createElement('a');
             link.setAttribute('href', 'https://img.youtube.com/vi/JMJXvsCLu6s/maxresdefault.jpg');
             link.setAttribute('download', 'download');
+            
             link.click();
         }
     </script>
