@@ -35,12 +35,12 @@
     </section>
     <footer>
         <p class="ftr-copyright">© <a href="">Ильичёв Колян</a>, 2021</p>
-        <p class="ftr-ver">ver. 0.11</p>
+        <p class="ftr-ver">ver. 0.12</p>
     </footer>
     <script>
         var inputText = document.querySelector('.inputText').value;
         var divGTN = document.querySelector('.divGTN');
-        let srcIMG = "https://img.youtube.com/vi/JMJXvsCLu6s/maxresdefault.jpg";
+        let defaultIMG = "https://img.youtube.com/vi/JMJXvsCLu6s/maxresdefault.jpg";
         
         getImage();
         setTimeout(getImage, 1000);
@@ -48,7 +48,11 @@
             let canvas = document.querySelector(".canvasPreview");
             let ctx = canvas.getContext("2d");
             let img = new Image();
-            img.src = srcIMG;
+            if (srcIMG == null) {
+                img.src = defaultIMG;
+            } else {
+                img.src = srcIMG;
+            }
             //img.setAttribute('crossOrigin', 'anonymous');
             canvas.width = img.width;
             canvas.height = img.height;
